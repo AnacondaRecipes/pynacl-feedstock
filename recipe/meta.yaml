@@ -1,6 +1,6 @@
-{% set name = "pynacl" %}
-{% set version = "1.1.2" %}
-{% set sha256 = "448897f0cfe3607dc23a871fa4405ef00926179df27ee8dfd0e46d42c60d8968" %}
+{% set name = "PyNaCl" %}
+{% set version = "1.2.0" %}
+{% set sha256 = "45c5bcdf8ddefe2e9381f5d37fe778bbda6991fe7004e0b1ea3570df2fc07207" %}
 
 package:
   name: {{ name|lower }}
@@ -8,28 +8,35 @@ package:
 
 source:
   fn: {{ name }}-{{ version }}.tar.gz
-  url: https://github.com/pyca/{{ name }}/archive/{{ version }}.tar.gz
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
   sha256: {{ sha256 }}
 
 build:
   number: 0
-  skip: True  # [win]
-  script: python setup.py install --single-version-externally-managed --record record.txt
 
 requirements:
-  build:
+  host:
     - python
     - setuptools
-    - cffi
+    - cffi >=1.4.1
+    - libsodium  # [win]
+
+  build:
+    - {{ compiler('c') }}
+
   run:
     - python
     - six
-    - cffi
+    - cffi >=1.4.1
 
 test:
+  imports:
+    - nacl
+    - nacl.bindings
+    - nacl.pwhash
   requires:
-    - pytest
-    - pretend
+    - pytest >=3.2.1
+    - hypothesis >=3.27.0
   source_files:
     - tests/
   commands:
