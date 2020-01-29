@@ -12,6 +12,8 @@ source:
   sha256: {{ sha256 }}
   patches:
     - 0001-Fix-name-of-static-sodium-lib.patch  # [win]
+    # Support hypothesis >4.0
+    - 480.patch
 
 build:
   number: 0
