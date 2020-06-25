@@ -4,4 +4,4 @@ if [[ ${HOST} =~ .*linux.* ]] && [[ ${ARCH} == 32 ]]; then
 fi
 export CPPFLAGS="$CPPFLAFS -I${PREFIX}/include"
 export SODIUM_INSTALL="system"
-python setup.py install --single-version-externally-managed --record record.txt
+python -m pip install . --no-deps --ignore-installed
