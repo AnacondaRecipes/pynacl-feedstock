@@ -14,7 +14,7 @@ source:
     - 0001-Fix-name-of-static-sodium-lib.patch
 
 build:
-  number: 0
+  number: 1
   ignore_run_exports:  # [win]
     - libsodium        # [win]
 
