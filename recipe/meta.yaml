@@ -29,8 +29,9 @@ requirements:
     - msinttypes  # [win and vc<14]
 
   build:
-    - m2-patch    # [win]
     - {{ compiler('c') }}
+    - patch     # [not win]
+    - m2-patch  # [win]
 
   run:
     - python
