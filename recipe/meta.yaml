@@ -6,16 +6,16 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name|lower }}-{{ version }}.tar.gz
   sha256: 8ac7448f09ab85811607bdd21ec2464495ac8b7c66d146bf545b0f08fb9220ba
-  patches:
-    - 0001-Fix-name-of-static-sodium-lib.patch
+  # patches:
+  #   - 0001-Fix-name-of-static-sodium-lib.patch
 
 build:
   number: 2
   skip: True  # [py<36]
-  ignore_run_exports:  # [win]
-    - libsodium        # [win]
+  # ignore_run_exports:  # [win]
+  #   - libsodium        # [win]
 
 requirements:
   build:
@@ -36,6 +36,7 @@ requirements:
     - python
     - six
     - cffi >=1.4.1
+    - libsodium
 
 test:
   imports:
