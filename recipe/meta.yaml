@@ -1,34 +1,27 @@
 {% set name = "PyNaCl" %}
 {% set version = "1.5.0" %}
-{% set sha256 = "8ac7448f09ab85811607bdd21ec2464495ac8b7c66d146bf545b0f08fb9220ba" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  fn: {{ name }}-{{ version }}.tar.gz
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: {{ sha256 }}
-  patches:
-    - 0001-Fix-name-of-static-sodium-lib.patch
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  sha256: 8ac7448f09ab85811607bdd21ec2464495ac8b7c66d146bf545b0f08fb9220ba
 
 build:
-  number: 1
+  number: 2
   skip: True  # [py<36]
-  ignore_run_exports:  # [win]
-    - libsodium        # [win]
 
 requirements:
   build:
     - {{ compiler('c') }}
+    - {{ stdlib('c') }}
     - gnuconfig  # [unix]
-    - m2-patch   # [win]
-    - patch      # [not win]
   host:
     - python
     - cffi >=1.4.1
-    - libsodium
+    - libsodium 1.0.20
     - msinttypes  # [win and vc<14]
     - pip
     - setuptools >=40.8.0
@@ -37,6 +30,7 @@ requirements:
     - python
     - six
     - cffi >=1.4.1
+    - libsodium
 
 test:
   imports:
@@ -59,10 +53,12 @@ about:
   license: Apache-2.0
   license_family: Apache
   license_file: LICENSE
-  summary: PyNaCl is a Python binding to the Networking and Cryptography library, a crypto library with the stated goal of improving usability, security and speed.
+  summary: PyNaCl is a Python binding to the Networking and Cryptography library.
   description: |
-    PyNaCl is a Python binding to the Networking and Cryptography library, a crypto library with the stated goal of improving usability, security and speed. It supports Python 2.7 and 3.3+ as well as PyPy 2.6+.
-  doc_url: https://pynacl.readthedocs.io/en/latest/
+    PyNaCl is a Python binding to the Networking and Cryptography library,
+    a crypto library with the stated goal of improving usability, security
+    and speed. It supports Python 2.7 and 3.3+ as well as PyPy 2.6+.
+  doc_url: https://pynacl.readthedocs.io
   dev_url: https://github.com/pyca/pynacl
 
 extra:
