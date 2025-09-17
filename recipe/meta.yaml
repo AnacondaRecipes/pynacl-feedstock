@@ -58,7 +58,7 @@ about:
     PyNaCl is a Python binding to the Networking and Cryptography library,
     a crypto library with the stated goal of improving usability, security
     and speed. It supports Python 2.7 and 3.3+ as well as PyPy 2.6+.
-  doc_url: https://pynacl.readthedocs.io/en/latest
+  doc_url: https://pynacl.readthedocs.io
   dev_url: https://github.com/pyca/pynacl
 
 extra:
