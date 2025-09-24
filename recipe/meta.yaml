@@ -1,36 +1,43 @@
 {% set name = "PyNaCl" %}
-{% set version = "1.5.0" %}
+{% set version = "1.6.0" %}
+{% set sha256 = "cb36deafe6e2bce3b286e5d1f3e1c246e0ccdb8808ddb4550bb2792f2df298f2" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 8ac7448f09ab85811607bdd21ec2464495ac8b7c66d146bf545b0f08fb9220ba
+  fn: {{ name }}-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/P/PyNaCl/pynacl-1.6.0.tar.gz
+  sha256: {{ sha256 }}
+  patches:
+    - 0001-Fix-name-of-static-sodium-lib.patch
 
 build:
-  number: 2
-  skip: True  # [py<36]
+  number: 0
+  skip: true  # [py<38]
+  ignore_run_exports:  # [win]
+    - libsodium  # [win]
 
 requirements:
   build:
     - {{ compiler('c') }}
     - {{ stdlib('c') }}
     - gnuconfig  # [unix]
+    - m2-patch  # [win]
+    - patch  # [not win]
   host:
     - python
-    - cffi >=1.4.1
-    - libsodium 1.0.20
+    - cffi >=2.0.0  # [py>=314]
+    - libsodium
     - msinttypes  # [win and vc<14]
     - pip
-    - setuptools >=40.8.0
+    - setuptools >=61.0.0,!=74.0.0
     - wheel
   run:
     - python
     - six
-    - cffi >=1.4.1
-    - libsodium
+    - cffi >=2.0.0  # [py>=314]
 
 test:
   imports:
