@@ -8,9 +8,9 @@ if [[ ${HOST} =~ .*linux.* ]] && [[ ${ARCH} == 32 ]]; then
 fi
 
 # Define the environment variable LIBSODIUM_MAKE_ARGS to pass arguments to make and enable parallelization
-export LIBSODIUM_MAKE_ARGS="-j4"
+export LIBSODIUM_MAKE_ARGS="-j${CPU_COUNT}"
 
 export CPPFLAGS="$CPPFLAGS -I${PREFIX}/include"
 export SODIUM_INSTALL="system"
 
-python -m pip install . --no-deps --no-build-isolation --ignore-installed
+$PYTHON -m pip install . -vv --no-deps --no-build-isolation --ignore-installed
