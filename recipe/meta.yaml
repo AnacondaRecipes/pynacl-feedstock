@@ -1,5 +1,5 @@
 {% set name = "PyNaCl" %}
-{% set version = "1.6.0" %}
+{% set version = "1.6.2" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name|lower }}-{{ version }}.tar.gz
-  sha256: cb36deafe6e2bce3b286e5d1f3e1c246e0ccdb8808ddb4550bb2792f2df298f2
+  sha256: 018494d6d696ae03c7e656e5e74cdfd8ea1326962cc401bcf018f1ed8436811c
 
 build:
   number: 0
@@ -22,18 +22,18 @@ requirements:
     - pip
     - python
     - setuptools >=61.0.0,!=74.0.0
+    - wheel
     - cffi >=1.4.1
-    - libsodium 1.0.20
-    - msinttypes  # [win and vc<14]
+    - cffi >=2.0.0
+    - libsodium
   run:
     - python
     - six
     - cffi >=1.4.1
-    - libsodium
 
 test:
   source_files:
-    - tests/
+    - tests
   imports:
     - nacl
     - nacl.pwhash
