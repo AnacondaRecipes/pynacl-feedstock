@@ -10,7 +10,7 @@ source:
   sha256: 018494d6d696ae03c7e656e5e74cdfd8ea1326962cc401bcf018f1ed8436811c
 
 build:
-  number: 0
+  number: 1
   skip: true  # [py<38]
 
 requirements:
@@ -23,7 +23,6 @@ requirements:
     - python
     - setuptools >=61.0.0,!=74.0.0
     - wheel
-    - cffi >=1.4.1
     - cffi >=2.0.0
     - libsodium {{ libsodium }}
   run:
